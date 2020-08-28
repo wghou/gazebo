@@ -3,7 +3,7 @@
 This source file is part of SkyX.
 Visit http://www.paradise-studios.net/products/skyx/
 
-Copyright (C) 2009-2012 Xavier Verguín González <xavyiy@gmail.com>
+Copyright (C) 2009-2012 Xavier Verguï¿½n Gonzï¿½lez <xavyiy@gmail.com>
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free Software
@@ -26,6 +26,8 @@ http://www.gnu.org/copyleft/lesser.txt.
 #endif
 
 #include "SkyX.h"
+
+#include "gazebo/common/Profiler.hh"
 
 namespace SkyX
 {
@@ -142,6 +144,8 @@ namespace SkyX
 
   void SkyX::update(const Ogre::Real& timeSinceLastFrame)
   {
+    GZ_PROFILE("SkyX::Update");
+    GZ_PROFILE_BEGIN("Update");
     if (!mCreated || !this->mEnabled)
     {
       return;
@@ -181,6 +185,7 @@ namespace SkyX
       mCloudsManager->update();
       mVCloudsManager->update(timeSinceLastFrame);
     }
+    GZ_PROFILE_END();
   }
 
   void SkyX::notifyCameraRender(Ogre::Camera* c)

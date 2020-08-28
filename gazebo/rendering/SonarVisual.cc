@@ -16,6 +16,7 @@
 */
 #include <boost/bind.hpp>
 
+#include "gazebo/common/Profiler.hh"
 #include "gazebo/common/MeshManager.hh"
 #include "gazebo/transport/transport.hh"
 
@@ -96,6 +97,8 @@ void SonarVisual::OnMsg(ConstSonarStampedPtr &_msg)
 /////////////////////////////////////////////////
 void SonarVisual::Update()
 {
+  GZ_PROFILE("SonarVisual::Update");
+  GZ_PROFILE_BEGIN("Update");
   SonarVisualPrivate *dPtr =
       reinterpret_cast<SonarVisualPrivate *>(this->dataPtr);
 
@@ -141,4 +144,5 @@ void SonarVisual::Update()
           (rangeDelta * 0.5) - dPtr->sonarMsg->sonar().range()));
   }
   dPtr->receivedMsg = false;
+  GZ_PROFILE_END();
 }

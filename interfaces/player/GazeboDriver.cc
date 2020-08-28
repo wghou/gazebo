@@ -177,13 +177,15 @@ int GazeboDriver::Unsubscribe(player_devaddr_t addr)
 // Main function for device thread
 void GazeboDriver::Update()
 {
+  GZ_PROFILE("GazeboDriver::Update");
+  GZ_PROFILE_BEGIN("Update");
   Driver::ProcessMessages();
 
   for (auto device: this->devices)
   {
     device->Update();
   }
-
+  GZ_PROFILE_END();
   return;
 }
 

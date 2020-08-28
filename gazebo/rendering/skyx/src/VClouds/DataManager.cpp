@@ -3,7 +3,7 @@
 This source file is part of SkyX.
 Visit http://www.paradise-studios.net/products/skyx/
 
-Copyright (C) 2009-2012 Xavier Verguín González < xavyiy@gmail.com>
+Copyright (C) 2009-2012 Xavier Verguï¿½n Gonzï¿½lez < xavyiy@gmail.com>
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free Software
@@ -28,6 +28,8 @@ http://www.gnu.org/copyleft/lesser.txt.
 
 #include "VClouds/VClouds.h"
 #include "VClouds/Ellipsoid.h"
+
+#include "gazebo/common/Profiler.hh"
 
 namespace SkyX { namespace VClouds
 {
@@ -80,6 +82,8 @@ namespace SkyX { namespace VClouds
 
   void DataManager::update(const Ogre::Real &timeSinceLastFrame)
   {
+    GZ_PROFILE("DataManager::Update");
+    GZ_PROFILE_BEGIN("Update");
     if (mVolTexToUpdate)
     {
       mCurrentTransition += timeSinceLastFrame;
@@ -161,6 +165,7 @@ namespace SkyX { namespace VClouds
         mStep = mXStart = mXEnd = 0;
       }
     }
+    GZ_PROFILE_END();
   }
 
   void DataManager::create(const int &nx, const int &ny, const int &nz)

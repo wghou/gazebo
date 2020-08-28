@@ -3,7 +3,7 @@
 This source file is part of SkyX.
 Visit http://www.paradise-studios.net/products/skyx/
 
-Copyright (C) 2009-2012 Xavier Verguín González <xavyiy@gmail.com>
+Copyright (C) 2009-2012 Xavier Verguï¿½n Gonzï¿½lez <xavyiy@gmail.com>
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free Software
@@ -25,6 +25,7 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "VClouds/VClouds.h"
 
 #include "SkyX.h"
+#include "gazebo/common/Profiler.hh"
 
 namespace SkyX { namespace VClouds
 {
@@ -150,6 +151,8 @@ void VClouds::remove()
 
 void VClouds::update(const Ogre::Real& timeSinceLastFrame)
 {
+  GZ_PROFILE("VClouds::Update");
+  GZ_PROFILE_BEGIN("Update");
   if (!mCreated)
   {
     return;
@@ -177,6 +180,7 @@ void VClouds::update(const Ogre::Real& timeSinceLastFrame)
       getTechnique(0)->getPass(0)->getFragmentProgramParameters()->
       setNamedConstant("uSunDirection", -mSunDirection);
   }
+  GZ_PROFILE_END();
 }
 
 void VClouds::notifyCameraRender(Ogre::Camera* c,

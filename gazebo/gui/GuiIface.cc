@@ -31,6 +31,7 @@
 #include "gazebo/gazebo_client.hh"
 
 #include "gazebo/common/Time.hh"
+#include "gazebo/common/Profiler.hh"
 #include "gazebo/common/ModelDatabase.hh"
 #include "gazebo/common/Console.hh"
 #include "gazebo/common/Plugin.hh"

@@ -19,6 +19,7 @@
 #include <ignition/math/Color.hh>
 
 #include "gazebo/common/Console.hh"
+#include "gazebo/common/Profiler.hh"
 #include "gazebo/rendering/ogre_gazebo.h"
 #include "gazebo/rendering/RenderTypes.hh"
 #include "gazebo/rendering/selection_buffer/SelectionRenderListener.hh"
@@ -107,6 +108,8 @@ SelectionBuffer::~SelectionBuffer()
 /////////////////////////////////////////////////
 void SelectionBuffer::Update()
 {
+  GZ_PROFILE("SelectionBuffer::Update");
+  GZ_PROFILE_BEGIN("Update");
   if (!this->dataPtr->renderTexture)
     return;
 
@@ -126,6 +129,7 @@ void SelectionBuffer::Update()
 
   this->dataPtr->renderTexture->copyContentsToMemory(*this->dataPtr->pixelBox,
       Ogre::RenderTarget::FB_FRONT);
+  GZ_PROFILE_END();
 }
 
 /////////////////////////////////////////////////

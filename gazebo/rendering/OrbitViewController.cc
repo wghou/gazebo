@@ -21,6 +21,7 @@
 #include <ignition/math/Vector2.hh>
 
 #include "gazebo/rendering/ogre_gazebo.h"
+#include "gazebo/common/Profiler.hh"
 #include "gazebo/common/MouseEvent.hh"
 
 #include "gazebo/rendering/Conversions.hh"

@@ -36,6 +36,7 @@
 #include "gazebo/common/Events.hh"
 #include "gazebo/common/Console.hh"
 #include "gazebo/common/Exception.hh"
+#include "gazebo/common/Profiler.hh"
 #include "gazebo/common/VideoEncoder.hh"
 
 #include "gazebo/rendering/ogre_gazebo.h"
@@ -48,6 +49,7 @@
 #include "gazebo/rendering/CameraPrivate.hh"
 #include "gazebo/rendering/Camera.hh"
 #include "gazebo/rendering/RenderEvents.hh"
+
 
 using namespace gazebo;
 using namespace rendering;
@@ -408,6 +410,8 @@ void Camera::SetScene(ScenePtr _scene)
 //////////////////////////////////////////////////
 void Camera::Update()
 {
+  GZ_PROFILE("Camera::Update");
+  GZ_PROFILE_BEGIN("Update");
   std::lock_guard<std::mutex> lock(this->dataPtr->receiveMutex);
 
   // Process all the command messages.
@@ -534,6 +538,7 @@ void Camera::Update()
 
     this->SetWorldPosition(pos);
   }
+  GZ_PROFILE_END();
 }
 
 //////////////////////////////////////////////////

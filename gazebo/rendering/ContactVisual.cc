@@ -19,6 +19,7 @@
  */
 #include <boost/bind.hpp>
 
+#include "gazebo/common/Profiler.hh"
 #include "gazebo/common/MeshManager.hh"
 #include "gazebo/transport/Node.hh"
 #include "gazebo/transport/Subscriber.hh"
@@ -69,6 +70,8 @@ ContactVisual::~ContactVisual()
 /////////////////////////////////////////////////
 void ContactVisual::Update()
 {
+  GZ_PROFILE("ContactVisual::Update");
+  GZ_PROFILE_BEGIN("Update");
   ContactVisualPrivate *dPtr =
       reinterpret_cast<ContactVisualPrivate *>(this->dataPtr);
 
@@ -126,6 +129,7 @@ void ContactVisual::Update()
     dPtr->points[c]->contactPointVis->SetVisible(false);
 
   dPtr->receivedMsg = false;
+  GZ_PROFILE_END();
 }
 
 /////////////////////////////////////////////////

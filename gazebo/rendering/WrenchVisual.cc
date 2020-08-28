@@ -16,6 +16,7 @@
 */
 #include <boost/bind.hpp>
 
+#include "gazebo/common/Profiler.hh"
 #include "gazebo/common/MeshManager.hh"
 #include "gazebo/transport/transport.hh"
 
@@ -159,6 +160,8 @@ void WrenchVisual::Load(ConstJointPtr &_msg)
 /////////////////////////////////////////////////
 void WrenchVisual::Update()
 {
+  GZ_PROFILE("WrenchVisual::Update");
+  GZ_PROFILE_BEGIN("Update");
   WrenchVisualPrivate *dPtr =
       reinterpret_cast<WrenchVisualPrivate *>(this->dataPtr);
 
@@ -200,6 +203,7 @@ void WrenchVisual::Update()
 
   dPtr->coneZVis->SetScale(ignition::math::Vector3d(0.02, 0.02, zScale));
   dPtr->coneZVis->SetPosition(ignition::math::Vector3d(0, 0, zScale * 0.5));
+  GZ_PROFILE_END();
 }
 
 /////////////////////////////////////////////////

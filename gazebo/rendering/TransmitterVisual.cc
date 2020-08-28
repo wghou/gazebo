@@ -16,6 +16,7 @@
 */
 #include <boost/bind.hpp>
 
+#include "gazebo/common/Profiler.hh"
 #include "gazebo/transport/transport.hh"
 #include "gazebo/rendering/Scene.hh"
 #include "gazebo/rendering/DynamicLines.hh"
@@ -88,6 +89,8 @@ void TransmitterVisual::OnNewPropagationGrid(ConstPropagationGridPtr &_msg)
 ////////////////////////////////////////////////
 void TransmitterVisual::Update()
 {
+  GZ_PROFILE("TransmitterVisual::Update");
+  GZ_PROFILE_BEGIN("Update");
   TransmitterVisualPrivate *dPtr =
       reinterpret_cast<TransmitterVisualPrivate *>(this->dataPtr);
 
@@ -126,4 +129,5 @@ void TransmitterVisual::Update()
     ignition::math::Color color(strength, strength, strength);
     dPtr->points->SetColor(i, color);
   }
+  GZ_PROFILE_END();
 }
